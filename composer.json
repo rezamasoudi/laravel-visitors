@@ -1,0 +1,44 @@
+{
+    "name": "masoudi/laravel-visitors",
+    "description": "Laravel package for tracking visitors",
+    "authors": [
+        {
+            "name": "Reza Masoudi",
+            "email": "dev.masoudi@gmail.com"
+        }
+    ],
+    "keywords": [
+        "laravel",
+        "package",
+        "visitors"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/rezamasoudi/laravel-visitors",
+    "autoload": {
+        "psr-4": {
+            "Masoudi\\Laravel\\Visitors\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "require": {
+        "php": "^7.3|^8.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Masoudi\\Laravel\\Visitors\\Providers\\VisitorServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "orchestra/testbench": "^6.0"
+    }
+}
