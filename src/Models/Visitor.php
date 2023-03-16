@@ -8,18 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
 /**
- * @method static \Masoudi\Laravel\Visitors\Models\Visitor range(\DateTime $startDateTime, ?\DateTime $endDateTime = null)
- * @method static \Masoudi\Laravel\Visitors\Models\Visitor platform(string $platform)
- * @method static \Masoudi\Laravel\Visitors\Models\Visitor browser(string $browser)
- * @method static \Masoudi\Laravel\Visitors\Models\Visitor ipStarts(string $ip)
- * @method static \Masoudi\Laravel\Visitors\Models\Visitor ipEnds(string $ip)
- * @method static \Masoudi\Laravel\Visitors\Models\Visitor referrers(...$referrers)
- * @method static \Masoudi\Laravel\Visitors\Models\Visitor paths(...$paths)
- * @method static \Masoudi\Laravel\Visitors\Models\Visitor authId(int $authId)
+ * @method static Visitor range(\DateTime $startDateTime, ?\DateTime $endDateTime = null)
+ * @method static Visitor platform(string $platform)
+ * @method static Visitor browser(string $browser)
+ * @method static Visitor ipStarts(string $ip)
+ * @method static Visitor ipEnds(string $ip)
+ * @method static Visitor referrers(...$referrers)
+ * @method static Visitor paths(...$paths)
+ * @method static Visitor authId(int $authId)
  */
 class Visitor extends Model
 {
-    protected $table =  'visitors';
+    protected $table = 'visitors';
 
     protected $fillable = [
         'visitable',
@@ -33,7 +33,7 @@ class Visitor extends Model
 
     /**
      * Scope visitable class
-     * 
+     *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param string $visitable
      * @return \Illuminate\Database\Eloquent\Builder
@@ -45,7 +45,7 @@ class Visitor extends Model
 
     /**
      * Scope visitable id
-     * 
+     *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param int $visitableId
      * @return \Illuminate\Database\Eloquent\Builder
@@ -57,11 +57,11 @@ class Visitor extends Model
 
     /**
      * Scope date range
-     * 
+     *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param \DateTime $startDateTime
      * @param \DateTime $endDateTime
-     * @return \Masoudi\Laravel\Visitors\Models\Visitor
+     * @return Visitor
      */
     public function scopeRange(Builder $query, DateTime $startDateTime, ?DateTime $endDateTime = null)
     {
@@ -77,7 +77,7 @@ class Visitor extends Model
 
     /**
      * Scope visitor platform
-     * 
+     *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param string $platform
      * @return \Illuminate\Database\Eloquent\Builder
@@ -89,7 +89,7 @@ class Visitor extends Model
 
     /**
      * Scope visitor browser
-     * 
+     *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param string $browser
      * @return \Illuminate\Database\Eloquent\Builder
@@ -101,7 +101,7 @@ class Visitor extends Model
 
     /**
      * Scope IP Starts With
-     * 
+     *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param string $ip
      * @return \Illuminate\Database\Eloquent\Builder
@@ -113,7 +113,7 @@ class Visitor extends Model
 
     /**
      * Scope IP Ends With
-     * 
+     *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param string $ip
      * @return \Illuminate\Database\Eloquent\Builder
@@ -125,7 +125,7 @@ class Visitor extends Model
 
     /**
      * Scope Referrer
-     * 
+     *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param array $referrers
      * @return \Illuminate\Database\Eloquent\Builder
@@ -137,7 +137,7 @@ class Visitor extends Model
 
     /**
      * Scope Paths
-     * 
+     *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param array $paths
      * @return \Illuminate\Database\Eloquent\Builder
@@ -149,7 +149,7 @@ class Visitor extends Model
 
     /**
      * Scope Auth ID
-     * 
+     *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param int $authId
      * @return \Illuminate\Database\Eloquent\Builder
