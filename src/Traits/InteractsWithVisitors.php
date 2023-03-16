@@ -2,7 +2,9 @@
 
 namespace Masoudi\Laravel\Visitors\Traits;
 
-use \Masoudi\Laravel\Visitors\Models\Visitor;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Http\Request;
+use Masoudi\Laravel\Visitors\Models\Visitor;
 
 /**
  * @method static Visitor visitors()
@@ -11,24 +13,24 @@ use \Masoudi\Laravel\Visitors\Models\Visitor;
 trait InteractsWithVisitors
 {
     /**
-     * Visit Model
+     * Handle dynamic static method calls into the model.
+     *
+     * @param string $method
+     * @param array $parameters
+     * @return mixed
      */
-    public function visit()
+    public static function __callStatic($method, $parameters)
     {
-        Visitor::create([
-            'visitable'     =>  static::class,
-            'visitable_id'     =>  $this->id,
-            'auth_id'       =>  auth()?->id(),
-            'ip'            =>  $_SERVER['REMOTE_ADDR'] ?? null,
-            'referrer'      =>  $_SERVER['HTTP_REFERER'] ?? null,
-            'user_agent'    =>  $_SERVER['HTTP_USER_AGENT'] ?? null,
-            'path'          =>  $_SERVER['REQUEST_URI'] ?? null
-        ]);
+        if ($method == 'visitors') {
+            return (new static)->createVisitor();
+        }
+
+        return (new static)->$method(...$parameters);
     }
 
     /**
      * Create Visitors Query
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     protected function createVisitor()
@@ -42,10 +44,29 @@ trait InteractsWithVisitors
     }
 
     /**
+     * Visit Model
+     */
+    public function visit(?Authenticatable $user = null, ?Request $request = null)
+    {
+        $user = $user ?? resolve(Authenticatable::class);
+        $request = $request ?? resolve(Request::class);
+
+        Visitor::create([
+            'visitable' => static::class,
+            'visitable_id' => $this->id,
+            'auth_id' => $user?->id,
+            'ip' => $request->ip(),
+            'referrer' => $request->header('referer'),
+            'user_agent' => $request->userAgent(),
+            'path' => $request->path(),
+        ]);
+    }
+
+    /**
      * Handle dynamic method calls into the model.
      *
-     * @param  string  $method
-     * @param  array  $parameters
+     * @param string $method
+     * @param array $parameters
      * @return mixed
      */
     public function __call($method, $parameters)
@@ -63,21 +84,5 @@ trait InteractsWithVisitors
         }
 
         return $this->forwardCallTo($this->newQuery(), $method, $parameters);
-    }
-
-    /**
-     * Handle dynamic static method calls into the model.
-     *
-     * @param  string  $method
-     * @param  array  $parameters
-     * @return mixed
-     */
-    public static function __callStatic($method, $parameters)
-    {
-        if ($method == 'visitors') {
-            return (new static)->createVisitor();
-        }
-
-        return (new static)->$method(...$parameters);
     }
 }
