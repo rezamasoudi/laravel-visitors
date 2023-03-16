@@ -2,13 +2,13 @@
 
 namespace Masoudi\Laravel\Visitors\Traits;
 
-use Masoudi\Laravel\Visitors\Models\Visitor;
+use \Masoudi\Laravel\Visitors\Models\Visitor;
 
 /**
- * @method static \Masoudi\Laravel\Visitors\Models\Visitor visitors()
- * @method \Masoudi\Laravel\Visitors\Models\Visitor visitors()
+ * @method static Visitor visitors()
+ * @method Visitor visitors()
  */
-trait InteractsWithVisitor
+trait InteractsWithVisitors
 {
     /**
      * Visit Model

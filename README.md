@@ -24,11 +24,11 @@ Prepaire model to working with visitors
 
 ```php
 use Masoudi\Laravel\Visitors\Contracts\Visitable;
-use Masoudi\Laravel\Visitors\Traits\InteractsWithVisitor;
+use Masoudi\Laravel\Visitors\Traits\InteractsWithVisitors;
 
 class Article extends Model implements Visitable
 {
-    use InteractsWithVisitor;
+    use InteractsWithVisitors;
 }
 ```
 
