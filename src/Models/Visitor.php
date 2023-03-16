@@ -13,7 +13,7 @@ use Illuminate\Support\Carbon;
  * @method static Visitor browser(string $browser)
  * @method static Visitor ipStarts(string $ip)
  * @method static Visitor ipEnds(string $ip)
- * @method static Visitor referrers(...$referrers)
+ * @method static Visitor referrers(...$refers)
  * @method static Visitor paths(...$paths)
  * @method static Visitor authId(int $authId)
  */
@@ -130,9 +130,9 @@ class Visitor extends Model
      * @param array $referrers
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeReferrers(Builder $query, ...$referrers)
+    public function scopeReferrers(Builder $query, ...$refers)
     {
-        return $query->where('referrer', 'REGEXP', implode("|", $referrers));
+        return $query->where('referer', 'REGEXP', implode("|", $referrers));
     }
 
     /**

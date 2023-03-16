@@ -56,7 +56,7 @@ trait InteractsWithVisitors
             'visitable_id' => $this->id,
             'auth_id' => $user?->id,
             'ip' => $request->ip(),
-            'referrer' => $request->header('referer'),
+            'referer' => $request->header('referer'),
             'user_agent' => $request->userAgent(),
             'path' => $request->path(),
         ]);

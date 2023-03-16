@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -19,7 +18,7 @@ return new class extends Migration
             $table->string("visitable_id");
             $table->string('auth_id')->nullable();
             $table->string('ip')->nullable();
-            $table->string('referrer')->nullable();
+            $table->string('referer')->nullable();
             $table->string('user_agent')->nullable();
             $table->string('path')->nullable();
             $table->timestamps();
