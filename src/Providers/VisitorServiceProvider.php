@@ -4,6 +4,7 @@ namespace Masoudi\Laravel\Visitors\Providers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
+use Masoudi\Laravel\Visitors\Middlewares\VisitMiddleware;
 use Masoudi\Laravel\Visitors\Models\Visitor;
 
 class VisitorServiceProvider extends ServiceProvider
@@ -18,6 +19,12 @@ class VisitorServiceProvider extends ServiceProvider
                     Visitor::visit($this);
                 }
             });
+        }
+
+        // Register visitor middleware
+        if (isset($this->app['router'])) {
+            $router = $this->app['router'];
+            $router->aliasMiddleware("visitor", VisitMiddleware::class);
         }
 
         $this->publishes([
