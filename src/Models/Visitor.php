@@ -5,6 +5,7 @@ namespace Masoudi\Laravel\Visitors\Models;
 use DateTime;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 /**
@@ -30,6 +31,22 @@ class Visitor extends Model
         'user_agent',
         'path',
     ];
+
+    /**
+     * Visit request
+     * s
+     * @param Request $request
+     * @return void
+     */
+    public static function visit(Request $request): void
+    {
+        self::create([
+            'ip' => $request->ip(),
+            'referer' => $request->header('referer'),
+            'user_agent' => $request->userAgent(),
+            'path' => $request->path(),
+        ]);
+    }
 
     /**
      * Scope visitable class
@@ -157,5 +174,10 @@ class Visitor extends Model
     public function scopeAuthId(Builder $query, $authId)
     {
         return $query->where('visitable_id', $authId);
+    }
+
+    public function scopeUniqueCount(Builder $query): int
+    {
+        return $query->groupBy("ip")->distinct()->count("ip");
     }
 }
