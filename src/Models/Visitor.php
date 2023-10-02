@@ -150,7 +150,7 @@ class Visitor extends Model
      */
     public function scopeReferrers(Builder $query, ...$refers)
     {
-        return $query->where('referer', 'REGEXP', implode("|", $referrers));
+        return $query->where('referer', 'REGEXP', implode("|", $refers));
     }
 
     /**
