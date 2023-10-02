@@ -41,6 +41,7 @@ class Visitor extends Model
     public static function visit(Request $request): void
     {
         self::create([
+            'auth_id' => $request->user()?->id,
             'ip' => $request->ip(),
             'referer' => $request->header('referer'),
             'user_agent' => $request->userAgent(),
