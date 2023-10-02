@@ -178,6 +178,6 @@ class Visitor extends Model
 
     public function scopeUniqueCount(Builder $query): int
     {
-        return $query->groupBy("ip")->distinct()->count("ip");
+        return $query->distinct('ip')->count('ip');
     }
 }
