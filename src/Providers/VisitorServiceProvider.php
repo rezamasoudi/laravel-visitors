@@ -28,8 +28,8 @@ class VisitorServiceProvider extends ServiceProvider
         }
 
         $this->publishes([
-            __DIR__ . "/../../database/2022_09_06_192335_create_visitors_table.php"
-            => database_path("migrations/2022_09_06_192335_create_visitors_table.php")
+            __DIR__ . "/../../database/2023_09_20_192335_create_visitors_table.php"
+            => database_path("migrations/2023_09_20_192335_create_visitors_table.php")
         ], 'masoudi-laravel-visitors');
     }
 }
