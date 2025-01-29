@@ -32,6 +32,12 @@ class Visitor extends Model
         'path',
     ];
 
+    public function __construct(array $attributes = [])
+    {
+        $this->connection = config('visitors.connection');
+        parent::__construct($attributes);
+    }
+
     /**
      * Visit request
      * s
