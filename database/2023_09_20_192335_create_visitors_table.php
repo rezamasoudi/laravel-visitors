@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('auth_id')->nullable();
             $table->string('ip')->nullable()->index();
             $table->string('referer')->nullable();
-            $table->string('user_agent')->nullable();
+            $table->text('user_agent')->nullable();
             $table->string('path')->nullable();
             $table->timestamps();
         });
